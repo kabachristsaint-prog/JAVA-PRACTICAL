@@ -1,58 +1,68 @@
-class Person {
-    String name;
-    int age;
+// Abstract base class
+abstract class Person {
+    protected String name;
+    protected int age;
 
-    void inputPerson(String name, int age) {
+    // Constructor
+    public Person(String name, int age) {
         this.name = name;
         this.age = age;
     }
 
-    void displayPerson() {
-        System.out.println("Name: " + name);
-        System.out.println("Age: " + age);
-    }
+    // Abstract method (must be overridden)
+    public abstract void displayDetails();
 }
 
+// Derived class 1: Student
 class Student extends Person {
-    int rollNumber;
+    private int rollNumber;
 
-    void inputStudent(String name, int age, int rollNumber) {
-        inputPerson(name, age);
+    public Student(String name, int age, int rollNumber) {
+        super(name, age); // call to parent class constructor
         this.rollNumber = rollNumber;
     }
 
-    void displayStudent() {
-        System.out.println("STUDENT DETAILS");
-        displayPerson();
-        System.out.println("UID: " + rollNumber);
+    @Override
+    public void displayDetails() {
+        System.out.println("Student Details:");
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Roll Number: " + rollNumber);
+        System.out.println();
     }
 }
 
+// Derived class 2: Teacher
 class Teacher extends Person {
-    String subjectCode;
+    private String subjectCode;
 
-    void inputTeacher(String name, int age, String subjectCode) {
-        inputPerson(name, age);
+    public Teacher(String name, int age, String subjectCode) {
+        super(name, age);
         this.subjectCode = subjectCode;
     }
 
-    void displayTeacher() {
-        System.out.println("TEACHER DETAILS");
-        displayPerson();
-        System.out.println("SUBJECT CODE: " + subjectCode);
+    @Override
+    public void displayDetails() {
+        System.out.println("Teacher Details:");
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Subject Code: " + subjectCode);
+        System.out.println();
     }
 }
 
-public class HierarchicalInheritanceDemo {
+// Main class
+public class PolymorphismDemo {
     public static void main(String[] args) {
-        Student s = new Student();
-        s.inputStudent("KAVYANSH", 20, 10677);
-        s.displayStudent();
+        // Reference of type Person
+        Person personRef;
 
-        System.out.println();
+        // Assign Student object
+        personRef = new Student("Riya Sharma", 20, 101);
+        personRef.displayDetails();  // Runtime polymorphism (Student's method executes)
 
-        Teacher t = new Teacher();
-        t.inputTeacher("MR.ROHAN", 78, "TC868");
-        t.displayTeacher();
+        // Assign Teacher object
+        personRef = new Teacher("Aditya Verma", 35, "CS301");
+        personRef.displayDetails();  // Runtime polymorphism (Teacher's method executes)
     }
 }
