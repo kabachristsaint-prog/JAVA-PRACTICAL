@@ -1,59 +1,58 @@
-abstract class Person {
-    protected String name;
-    protected int age;
+class Person {
+    String name;
+    int age;
 
-    public Person(String name, int age) {
+    void inputPerson(String name, int age) {
         this.name = name;
         this.age = age;
     }
 
-    public abstract void displayDetails();
+    void displayPerson() {
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+    }
 }
 
 class Student extends Person {
-    private int rollNumber;
+    int rollNumber;
 
-    public Student(String name, int age, int rollNumber) {
-        super(name, age);
+    void inputStudent(String name, int age, int rollNumber) {
+        inputPerson(name, age);
         this.rollNumber = rollNumber;
     }
 
-    @Override
-    public void displayDetails() {
-        System.out.println("=== Student Details ===");
-        System.out.println("Name: " + name);
-        System.out.println("Age: " + age);
-        System.out.println("Roll Number: " + rollNumber);
-        System.out.println();
+    void displayStudent() {
+        System.out.println("STUDENT DETAILS");
+        displayPerson();
+        System.out.println("UID: " + rollNumber);
     }
 }
 
 class Teacher extends Person {
-    private String subjectCode;
+    String subjectCode;
 
-    public Teacher(String name, int age, String subjectCode) {
-        super(name, age);
+    void inputTeacher(String name, int age, String subjectCode) {
+        inputPerson(name, age);
         this.subjectCode = subjectCode;
     }
 
-    @Override
-    public void displayDetails() {
-        System.out.println("=== Teacher Details ===");
-        System.out.println("Name: " + name);
-        System.out.println("Age: " + age);
-        System.out.println("Subject Code: " + subjectCode);
-        System.out.println();
+    void displayTeacher() {
+        System.out.println("TEACHER DETAILS");
+        displayPerson();
+        System.out.println("SUBJECT CODE: " + subjectCode);
     }
 }
 
-public class PolymorphismDemo {
+public class HierarchicalInheritanceDemo {
     public static void main(String[] args) {
-        Person personRef;
+        Student s = new Student();
+        s.inputStudent("KAVYANSH", 20, 10677);
+        s.displayStudent();
 
-        personRef = new Student("Riya Sharma", 20, 101);
-        personRef.displayDetails();
+        System.out.println();
 
-        personRef = new Teacher("Aditya Verma", 35, "CS301");
-        personRef.displayDetails();
+        Teacher t = new Teacher();
+        t.inputTeacher("MR.ROHAN", 78, "TC868");
+        t.displayTeacher();
     }
 }
